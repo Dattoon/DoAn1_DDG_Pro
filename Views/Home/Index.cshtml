@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_LayoutDDG.cshtml";
+}
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+
+@model X.PagedList.IPagedList<Product>
+
+
+@foreach (var item in Model)
+{
+   @await Html.PartialAsync("PartialSanPham", item)
+}
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }), new
+    X.PagedList.Web.Common.PagedListRenderOptions()
+{
+    LiElementClasses = new List<string> { "page-item" },
+    PageClasses = new List<string> { "page-link" }
+}
+
+    )

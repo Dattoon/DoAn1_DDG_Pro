@@ -1,0 +1,184 @@
+﻿@model DoAn1_DDG_Pro.Models.Product
+
+@{
+    ViewData["Title"] = "ChiTietSanPham";
+    Layout = "~/Views/Shared/_LayoutDDG.cshtml";
+}
+
+<section class="productDetail-information productDetail_style__01">
+        <div class="container container-pd0">
+            <div class="productDetail--main">
+                <div class="productDetail--gallery">
+                    <div class="product-container-gallery">
+                        <div class="wrapbox-gallery">
+                            <div class="wrapbox-image">
+                                <div class="owl-stage"
+                                    style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 100%;">
+                                    <div class="owl-item" style="width: 100%;">
+                                        <li class="product-gallery">
+                                            <a class="product-gallery__item" data-fancybox="gallery">
+                                            <img src="~/LayoutDDGSHOP/img/LinhKien/HinhTren/@Model.Imgtop">
+                                            </a>
+                                        </li>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="productDetail--content">
+                    <div class="wrapbox-inner">
+                        <div class="wrapbox-detail">
+                            <div class="product-heading">
+                                <h1>@Model.ProductName</h1>
+
+                                <span class="pro-soldold">Tình trạng:
+
+                                    <strong>Còn hàng</strong>
+
+                                </span>
+
+                            </div>
+                        </div>
+                        <div class="d-flex flex-wrap">
+                            <div class="col-lg-8 col-md-12 col-12 p-0 wrapbox-left">
+                                <div class="wrapbox-detail">
+                                    <div class="product-price" id="price-preview">
+                                        <span class="pro-title">Giá: </span>
+                                        <span class="pro-price">@Model.Price VND</span> 
+
+                                    </div>
+                                    <div class="product-variants" style="display:none">
+                                        <form id="add-item-form" action="/cart/add" method="post"
+                                            class="variants clearfix">
+                                            <div class="select clearfix" style="display:none">
+                                              
+                                            </div>
+                                            <div class="select-swatch clearfix">
+                                                <div id="variant-swatch-0" class="swatch clearfix" data-option="option1"
+                                                    data-option-index="0">
+                                                    <div class="title-swap header">Tiêu đề: </div>
+                                                    <div class="select-swap">
+                                                        <div data-value="Default Title"
+                                                            class="n-sd swatch-element default-title  ">
+                                                            <input class="variant-0" id="swatch-0-default-title"
+                                                                type="radio" name="option1" value="Default Title"
+                                                                data-vhandle="default-title" checked="">
+
+                                                            <label for="swatch-0-default-title">
+                                                                <span>Default Title</span>
+                                                            </label>
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <div class="product-actions">
+                                        <div class="select-actions d-none d-lg-block clearfix">
+                                            <div class="quantity-area">
+                                                <div class="quantity-title">Số lượng: </div>
+                                                <button type="button" onclick="HRT.All.minusQuantity()" class="qty-btn">
+                                                    <svg focusable="false" class="icon icon--minus " viewBox="0 0 10 2"
+                                                        role="presentation">
+                                                        <path d="M10 0v2H0V0z"></path>
+                                                    </svg>
+                                                </button>
+                                                <input type="text" id="quantity" name="quantity" value="1" min="1"
+                                                    class="quantity-input">
+                                                <button type="button" onclick="HRT.All.plusQuantity()" class="qty-btn">
+                                                    <svg focusable="false" class="icon icon--plus " viewBox="0 0 10 10"
+                                                        role="presentation">
+                                                        <path d="M6 4h4v2H6v4H4V6H0V4h4V0h2v4z"></path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                            <div class="addcart-area">
+                                                <button type="button" id="add-to-cart"
+                                                    class=" add-to-cartProduct button dark btn-addtocart addtocart-modal"
+                                                    name="add">
+                                                    Thêm vào giỏ
+                                                </button>
+
+                                                <button type="button" id="buy-now"
+                                                    class="  button dark btn-buynow btnred addtocart-modal" name="add">
+                                                    Mua ngay
+                                                </button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-12 col-12 p-0 wrapbox-right">
+                                <div class="wrapbox-detail">
+                                    <div class="d-flex flex-wrap product-deliverly">
+                                        <div class="col-lg-12 col-md-6 col-12 deliverly-inner">
+                                            <div class="title-deliverly">
+                                                <span>Chính sách bán hàng</span>
+                                            </div>
+                                            <div class="infoList-deliverly">
+                                                <div class="deliverly-item">
+                                                    <span>
+                                                        <img class=" ls-is-cached lazyloaded"
+                                                           
+                                                            src="//theme.hstatic.net/1000288298/1001020793/14/product_deliverly_1_ico.png?v=282"
+                                                            >
+                                                    </span>
+                                                    Cam kết 100% chính hãng
+                                                </div>
+                                                <div class="deliverly-item">
+                                                    <span>
+                                                        <img class=" ls-is-cached lazyloaded"
+                                                            
+                                                            src="//theme.hstatic.net/1000288298/1001020793/14/product_deliverly_3_ico.png?v=282"
+                                                            >
+                                                    </span>
+                                                    Hỗ trợ 24/7
+                                                </div>
+                                            </div>
+                                        </div>
+                                     
+                                    </div>
+                                    <div class="product-banner">
+                                        <a href="/collections/all">
+                                            <img
+                                                src="//theme.hstatic.net/1000288298/1001020793/14/product_banner.jpg?v=282">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="productDetail--box box-detail-description">
+                    <div class="product-description mg-top">
+                        <div class="box-title">
+                            <h2>Mô tả sản phẩm</h2>
+                        </div>
+                        <div class="description-content expandable-toggle opened">
+
+                            <div class="description-productdetail">
+                               @Model.Description
+                            </div>
+                            <div class="description-btn">
+                                <button class="expandable-content_toggle js_expandable_content d-none">
+                                    <span class="expandable-content_toggle-icon"></span>
+                                    <span class="expandable-content_toggle-text">Xem thêm nội dung</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
