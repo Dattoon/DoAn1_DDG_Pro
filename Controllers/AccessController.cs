@@ -24,20 +24,19 @@ namespace DoAn1_DDG_Pro.Controllers
 
         }
         [HttpPost]
-        public IActionResult Login(UserAccount user)
-
-        {   
-            if(HttpContext.Session.GetString("Username")==null)
+        public ActionResult Login(UserAccount user) 
+        {
+            if (HttpContext.Session.GetString("Username")== null)
             {
-                var u=db.UserAccounts.Where(x=>x.Username.Equals(user.Username) && x.Password.Equals(user.Password)).FirstOrDefault();
+                var u = db.UserAccounts.Where(x => x.Username.Equals(user.Username) && x.Password.Equals(user.Password)).FirstOrDefault();
                 if (u != null)
                 {
                     HttpContext.Session.SetString("Username", u.Username.ToString());
-                    return RedirectToAction("Index" ,"Home");
+                    return RedirectToAction("Index", "Home");
                 }
-                return View();
             }
-            
+            return View();
         }
+        
     }
 }

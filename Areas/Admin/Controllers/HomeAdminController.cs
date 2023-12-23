@@ -92,6 +92,13 @@ namespace DoAn1_DDG_Pro.Areas.Admin.Controllers
             return RedirectToAction("DanhMucSanPham", "HomeAdmin");
         }
 
+        [Route("danhmucloai")]
+        public  IActionResult DanhMucLoai()
+        {
+            var lstLoai = db.ProductTypes.ToList();
+            return View(lstLoai);
+        }
+
 
         
     }

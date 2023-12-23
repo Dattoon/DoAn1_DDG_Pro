@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿
+@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+@model UserAccount
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -20,7 +27,6 @@
 </head>
 
 <body>
-
     <!--Header-->
     <div id="templateHeader">
         <div class="mainHeader--height" style="min-height: 202.55px;">
@@ -240,8 +246,7 @@
                                                                         Khôi phục
                                                                     </button>
 
-                                                                    <input id="4884ec76fb7442abae1dbc4e728fca2f"
-                                                                           name="g-recaptcha-response" type="hidden">
+                                                                    
                                                                 </form>
                                                                 <div class="site_account_secondary-action">
                                                                     <p>
@@ -305,9 +310,6 @@
                                                             <table class="clone-item-cart table-clone-cart">
                                                             </table>
                                                             <table class="table-cart-view">
-                                                                
-
-
                                                             </table>
                                                         </div>
                                                         <div class="cart-view-line"></div>
@@ -349,7 +351,7 @@
                 <div class="header-bottom">
                     <div class="container">
                         <div class="row">
-                           @await Component.InvokeAsync("LoaiSpMenu")
+                            @await Component.InvokeAsync("LoaiSpMenu")
                             <div class="col-lg d-lg-flex d-none justify-content-between align-items-center box-content">
                                 <div class="box-policy">
                                     <ul>
@@ -383,138 +385,120 @@
             </header>
         </div>
     </div>
-    <main class="wrapperMain_content">
-    <!--Danh mục nổi bật-->
-    <section class="home-categorize home-cate-feature">
-        <div class="container container-pd0">
-            <div class="wrapbox row">
-                <div class="section-heading">
-                    <h2 class="hTitle"><a href="#">DANH MỤC NỔI BẬT</a></h2>
-                </div>
-                <div class="wrapbox-right col-lg-12 col-md-12 col-12">
-                    <div class="listCategorize row">
-                        <div class="col7-cus">
-                            <div class="item-icon">
-                                <div class="item-img boxlazy-img">
-                                    <span class="boxlazy-img__insert">
-                                        <img src="~/LayoutDDGSHOP/img/DMNB/Mouse.jpg" alt="Chuột máy tính"
-                                             class=" ls-is-cached lazyloaded">
-                                    </span>
-                                </div>
-                                <div class="item-title">
-                                    <h3>Chuột máy tính</h3>
-                                </div>
-                                <a href="" aria-label="Chuột máy tính" class="item-link"></a>
-                            </div>
+
+<main class="wrapperMain_content">
+        <div class="layout-account">
+            <div class="container">
+                <div class="wrapbox-content-account">
+                    <div id="customer-login" class="customers_accountForm customer_login">
+                        <div class="tab-form-account d-flex align-items-center justify-content-center">
+                            <h4 class="active">
+                                <a href="/Login.html">Đăng nhập</a>
+                            </h4>
+                            <h4>
+                                <a href="/Register.html">Đăng ký</a>
+                            </h4>
                         </div>
-                        <div class="col7-cus">
-                            <div class="item-icon">
-                                <div class="item-img boxlazy-img">
-                                    <span class="boxlazy-img__insert">
-                                        <img src="~/LayoutDDGSHOP/img/DMNB/Mh.jpg"
-                                             alt="Màn hình máy tính" class=" ls-is-cached lazyloaded">
-                                    </span>
-                                </div>
-                                <div class="item-title">
-                                    <h3>Màn hình máy tính</h3>
-                                </div>
-                                <a href="" aria-label="Màn hình máy tính" class="item-link"></a>
+                        <div id="login">
+                            <div class="accounttype">
+                                <h2 class="title"></h2>
                             </div>
+                        <!-- <form accept-charset="UTF-8" action="/account/login" id="customer_login" method="post"></form> -->
+                        @using(Html.BeginForm("Login","Access", FormMethod.Post)){
+                                <input name="form_type" type="hidden" value="customer_login">
+                                <input name="utf8" type="hidden" value="✓">
+
+
+                                <div class="clearfix large_form">
+                                    <label for="customer_email" class="icon-field"><i
+                                            class="icon-login icon-envelope "></i></label>
+                                <!-- <input required="" type="email" value="" name="customer[email]" id="customer_email"
+                                placeholder="Vui lòng nhập email của bạn" class="text"> -->
+                                @Html.TextBoxFor(x => x.Username, new { @class = "text ", placeholder = "User Name", required="required", autofocus="autofocus"})
+                                </div>
+
+                                <div class="clearfix large_form large_form-mrb">
+                                    <label for="customer_password" class="icon-field"><i
+                                            class="icon-login icon-shield"></i></label>
+                                <!--
+                                <input required="" type="password" value="" name="customer[password]"
+                                                                        id="customer_password" placeholder="Vui lòng nhập mật khẩu" class="text"
+                                                                        size="16"> -->
+                                @Html.TextBoxFor(x => x.Password, new { placeholder = "Vui lòng nhập mật khẩu", @class="text", size="16"})
+                                </div>
+
+                                
+                                <div class="clearfix custommer_account_action">
+                                    <div class="action_bottom button">
+                                    <!-- <input class="btn btn-signin" type="submit" value="Đăng nhập"> -->
+                                    <button  class="btn btn-signin" type="submit" >Đăng nhập</button>
+                                    </div>
+                                    <div class="req_pass">
+                                        <p>Bạn chưa có tài khoản?<a href="#"
+                                                onclick="showRecoverPasswordForm();return false;" title="Quên mật khẩu">
+                                                Quên mật khẩu?</a></p>
+                                        <p>Bạn quên mật khẩu?<a href="/Register.html" title ="Đăng ký"> Đăng ký</a>
+                                        </p>
+                                    </div>
+                                </div>
+
+                              
+                                
+                        }<!-- </form> -->
                         </div>
-                        <div class="col7-cus">
-                            <div class="item-icon">
-                                <div class="item-img boxlazy-img">
-                                    <span class="boxlazy-img__insert">
-                                        <img src="~/LayoutDDGSHOP/img/DMNB/Card.jpg" alt="Card đồ họa"
-                                             class=" ls-is-cached lazyloaded">
-                                    </span>
+                        <div id="recover-password" style="display:none;">
+                            <!--<div class="accounttype"><h2>Phục hồi mật khẩu</h2></div>	-->
+
+                            <form accept-charset="UTF-8" action="/account/recover" method="post">
+                                <input name="form_type" type="hidden" value="recover_customer_password">
+                                <input name="utf8" type="hidden" value="✓">
+
+
+                                <div class="clearfix large_form large_form-mrb">
+                                    <label for="email" class="icon-field"><i
+                                            class="icon-login icon-envelope "></i></label>
+                                    <input type="email" value="" size="30" name="email"
+                                        placeholder="Vui lòng nhập email của bạn" id="recover-email" class="text">
                                 </div>
-                                <div class="item-title">
-                                    <h3>Card đồ họa</h3>
+                                <div class="clearfix large_form sitebox-recaptcha ">
+                                    This site is protected by reCAPTCHA and the Google
+                                    <a href="https://policies.google.com/privacy" target="_blank"
+                                        rel="noreferrer">Privacy Policy</a>
+                                    and <a href="https://policies.google.com/terms" target="_blank"
+                                        rel="noreferrer">Terms of Service</a> apply.
                                 </div>
-                                <a href="" aria-label="Loa bluetooth" class="item-link"></a>
-                            </div>
+                                <div class="clearfix custommer_account_action">
+                                    <div class="action_bottom button dark">
+                                        <input class="btn" type="submit" value="Gửi email">
+                                    </div>
+                                    <div class="req_pass">Quay lại <a href="#"
+                                            onclick="hideRecoverPasswordForm();return false;">đăng nhập</a></div>
+                                </div>
+
+                                <input id="8f65d9e480934c749adcc2fb6dfcb509" name="g-recaptcha-response" type="hidden"
+                                    value="03AFcWeA5mgPoVLmTyxrZWWKlcnRd9hhGvxhc3idXwdz46QQoHFYL7SuraH-2tGNANjlngBNpS4ZXNBJXOezK_OogCBf56GkaDKnovB6M_okoawgSLdUXug9asMMZqvY6jyAamg1QdqnXNypQ2TVr0bq_cUsOoQwadZl6TiBtfTiVYqLNNnIeHATUEdbTuFHrOPsalOZtIY5Py5QsQGjAZTIQd4Slf2kuU2jlFt1XS2YGJ-lGGnHjgKKDjZmMpEeHS2kNR5Y08GkOyxUOU52MjQK0kfj2M1omn_ORs5TijNRS1fHFL-k_773p_pGuvVD0zCAjWFrsjntWyCtazUngBp0-8MX-fiCpTUO5HDtYIsr-dlfycbhdRld4ct4UQWT7k8eQQkYwZ4iP5vqmr8OsdNIRBIYDnWDpvFG2F2OErHt5ArAdmO942GTVFiQNz0oJ2bZzxusUPxd9moeuhvbHeJj6um0XoRyAzsfuYscTzS2TYnX4wxJs0ixBQj2WjPyuiRO5tpsuRefFDbyrRvHBssEO8eF54RhrkhPyr2u5FyGlHiTflI2Z6OFCid_Iy4XTM7U8YnfHR_MdFnfA5kGh7PKA9AePxs3AJf0xbjDqLGKrCVpHKxes6jpsUxyV37PUSb4WVptNan7xO">
+                
+                            </form>
                         </div>
-                        <div class="col7-cus">
-                            <div class="item-icon">
-                                <div class="item-img boxlazy-img">
-                                    <span class="boxlazy-img__insert">
-                                        <img src="~/LayoutDDGSHOP/img/DMNB/Headset.jpg" alt="Tai nghe"
-                                             class=" ls-is-cached lazyloaded">
-                                    </span>
-                                </div>
-                                <div class="item-title">
-                                    <h3>Tai nghe</h3>
-                                </div>
-                                <a href="" aria-label="Tai nghe" class="item-link"></a>
-                            </div>
-                        </div>
-                        <div class="col7-cus">
-                            <div class="item-icon">
-                                <div class="item-img boxlazy-img">
-                                    <span class="boxlazy-img__insert">
-                                        <img src="~/LayoutDDGSHOP/img/DMNB/Case.jpg" alt="Vỏ Case"
-                                             class=" ls-is-cached lazyloaded">
-                                    </span>
-                                </div>
-                                <div class="item-title">
-                                    <h3>Vỏ Case</h3>
-                                </div>
-                                <a href="" aria-label="Sạc dự phòng" class="item-link"></a>
-                            </div>
-                        </div>
-                        <div class="col7-cus">
-                            <div class="item-icon">
-                                <div class="item-img boxlazy-img">
-                                    <span class="boxlazy-img__insert">
-                                        <img src="~/LayoutDDGSHOP/img/DMNB/keyboard.jpg"
-                                             alt="Bàn phím máy tính" class=" ls-is-cached lazyloaded">
-                                    </span>
-                                </div>
-                                <div class="item-title">
-                                    <h3>Bàn phím máy tính</h3>
-                                </div>
-                                <a href="" aria-label="Bàn phím máy tính" class="item-link"></a>
-                            </div>
-                        </div>
-                        <div class="col7-cus">
-                            <div class="item-icon">
-                                <div class="item-img boxlazy-img">
-                                    <span class="boxlazy-img__insert">
-                                        <img src="~/LayoutDDGSHOP/img/DMNB/sac.jpg" alt="Cáp sạc"
-                                             class=" ls-is-cached lazyloaded">
-                                    </span>
-                                </div>
-                                <div class="item-title">
-                                    <h3>Cáp sạc</h3>
-                                </div>
-                                <a href="" aria-label="Cáp sạc" class="item-link"></a>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-     
-    <section class="home-productTabs home-productTabs-1">
-        <div class="container container-pd-parent">
-            <div class="wrapbox row-mg-parent">
-                <div class="wrapbox--right">
-                    <div class="tab-content collection-tabs-ajax">
-                        
-                        <div class="tab-pane fade  active show" id="coll-1-tab-1" role="tabpanel" data-get="true">
-                            
-                            <div class="row">
-                                <!--Sản phẩm-->
-                                @RenderBody()
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
+    <script type="text/javascript">
+        function showRecoverPasswordForm() {
+        document.getElementById('recover-password').style.display = 'block';
+        document.getElementById('login').style.display='none';
+        }
+    
+        function hideRecoverPasswordForm() {
+        document.getElementById('recover-password').style.display = 'none';
+        document.getElementById('login').style.display = 'block';
+        }
+    
+        if (window.location.hash == '#recover') { showRecoverPasswordForm() }
+    </script>
     </main>
     <!--Footer-->
     <footer class="mainFooter">
@@ -599,8 +583,6 @@
             </div>
         </div>
     </footer>
-
-    <script src="../LayoutDDGSHOP/JS/button.js"></script>
 
 </body>
 
