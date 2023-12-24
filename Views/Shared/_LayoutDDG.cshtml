@@ -33,7 +33,7 @@
 
                             <div class="header-wrap-logo">
                                 <div class="wrap-logo" itemscope="" itemtype="http://schema.org/Organization">
-                                    <a href="./DDG.html" itemprop="url">
+                                    <a asp-controller="Home"asp-action="Index" itemprop="url">
                                         <img itemprop="logo" src="~/LayoutDDGSHOP/img/DDGSHOPlogo.png"
                                              class="img-responsive logoimg ls-is-cached lazyloaded">
                                     </a>
@@ -132,7 +132,7 @@
                                     </div>
                                     <div class="header-action-item header-action_cart">
                                         <div class="header-action_text">
-                                            <button class="header-action__link  header-action_clicked "
+                                            <button a class="header-action__link  header-action_clicked "
                                                     id="site-cart-handle" aria-label="Giỏ hàng" title="Giỏ hàng"
                                                     type="button">
                                                 <span class="box-icon">
@@ -192,7 +192,7 @@
                                                                     </tr>
                                                                     <tr class="mini-cart__button">
                                                                         <td colspan="2">
-                                                                            <a href="./cart.html"
+                                                                            <a asp-controller="Cart" asp-action="Cart"
                                                                                class="linktocart button ">
                                                                                 Xem giỏ
                                                                                 hàng
@@ -211,6 +211,8 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <a asp-controller="Cart" asp-action="Cart">CART</a>
                                 </div>
                             </div>
                         </div>
@@ -255,7 +257,7 @@
     </div>
     <main class="wrapperMain_content">
     <!--Danh mục nổi bật-->
-    <section class="home-categorize home-cate-feature">
+    @* <section class="home-categorize home-cate-feature">
         <div class="container container-pd0">
             <div class="wrapbox row">
                 <div class="section-heading">
@@ -365,7 +367,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> *@
      
     <section class="home-productTabs home-productTabs-1">
         <div class="container container-pd-parent">

@@ -47,7 +47,7 @@
             <div class="proloop-actions" data-vrid="1104966306">
                 <div class="proloop-actions__inner">
                     <div class="actions-primary">
-                        <button type="submit" class="btn-proloop-cart add-to-cart">
+                        <button asp-action="Add" asp-controller="Cart" asp-route-ProductId="@Model.ProductId" type="submit" class="btn-proloop-cart add-to-cart">
                             <span class="btnico" title="Thêm vào giỏ">
                                 <svg class="btnico-first" viewBox="0 0 512 512">
                                     <g transform="translate(0 512) scale(.1 -.1)">
@@ -58,7 +58,7 @@
                                     </g>
                                 </svg>
                             </span>
-                            <span class="btnadd"> Thêm vào giỏ </span>
+                            <span asp-action="Add" asp-controller="Cart" asp-route-ProductId="@Model.ProductId" class="btnadd"> Thêm vào giỏ </span>
                         </button>
                     </div>
                 </div>

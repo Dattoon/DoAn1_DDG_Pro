@@ -1,5 +1,6 @@
 using DoAn1_DDG_Pro.Models;
 using DoAn1_DDG_Pro.Repository;
+using Microsoft.CodeAnalysis.Options;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,7 +14,12 @@ builder.Services.AddDbContext<ShopDdgContext>(x=>x.UseSqlServer(connectionString
 
 builder.Services.AddScoped<ILoaiSpRepository, LoaiSpRepository>();
 builder.Services.AddSession();
-
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(Option =>
+{
+    Option.IdleTimeout = TimeSpan.FromSeconds(5);
+    Option.Cookie.IsEssential = true;
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
