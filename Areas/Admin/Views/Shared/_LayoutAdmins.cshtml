@@ -28,20 +28,24 @@
                     <span class="mdi mdi-menu"></span>
                 </button>
                 <div class="search-field d-none d-md-block">
-                    <form class="d-flex align-items-center h-100" action="#">
+                    <form class="d-flex align-items-center h-100" asp-action="DanhMucSanPham" method="get">
                         <div class="input-group">
                             <div class="input-group-prepend bg-transparent">
                                 <i class="input-group-text border-0 mdi mdi-magnify"></i>
                             </div>
-                            <input type="text" class="form-control bg-transparent border-0" placeholder="Search projects">
+                            <input type="text" class="form-control bg-transparent border-0" placeholder="Tìm kiếm sản phẩm..." name="q">
                         </div>
                     </form>
+
+
+
+
                 </div>
                 <ul class="navbar-nav navbar-nav-right">
                     
                     
                     <li class="nav-item nav-logout d-none d-lg-block">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" asp-controller="Access" asp-action="Logout">
                             <i class="mdi mdi-power"></i>
                         </a>
                     </li>
@@ -68,7 +72,7 @@
                                 <!--change to offline or busy as needed-->
                             </div>
                             <div class="nav-profile-text d-flex flex-column">
-                                <span class="font-weight-bold mb-2">David Grey. H</span>
+                                <span class="font-weight-bold mb-2">Dattoon</span>
                                 <span class="text-secondary text-small">Project Manager</span>
                             </div>
                             <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
@@ -116,8 +120,8 @@
                 <!-- partial:../../partials/_footer.html -->
                 <footer class="footer">
                     <div class="container-fluid d-flex justify-content-between">
-                        <span class="text-muted d-block text-center text-sm-start d-sm-inline-block">Copyright © bootstrapdash.com 2021</span>
-                        <span class="float-none float-sm-end mt-1 mt-sm-0 text-end"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin template</a> from Bootstrapdash.com</span>
+                        <span class="text-muted d-block text-center text-sm-start d-sm-inline-block">Copyright ©  2021</span>
+                        <span class="float-none float-sm-end mt-1 mt-sm-0 text-end"> Free <a href="" target="_blank">admin </a> from</span>
                     </div>
                 </footer>
                 <!-- partial -->

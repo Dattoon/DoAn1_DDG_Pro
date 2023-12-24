@@ -19,11 +19,18 @@ namespace DoAn1_DDG_Pro.Areas.Admin.Controllers
             return View();
         }
         [Route("danhmucsanpham")]
-        public IActionResult DanhMucSanPham(int? page)
+        public IActionResult DanhMucSanPham(string q, int? page)
         {
             int pageSize = 10;
             int pageNumber = page == null || page < 0 ? 1 : page.Value;
-            var lstsanpham = db.Products.AsNoTracking().OrderBy(x => x.ProductName);
+            var lstsanpham = db.Products.AsNoTracking();
+
+            if (!String.IsNullOrEmpty(q))
+            {
+                lstsanpham = lstsanpham.Where(s => s.ProductName.ToUpper().Contains(q.ToUpper()));
+            }
+
+            lstsanpham = lstsanpham.OrderBy(x => x.ProductName);
             PagedList<Product> lst = new PagedList<Product>(lstsanpham, pageNumber, pageSize);
             return View(lst);
         }
@@ -98,6 +105,34 @@ namespace DoAn1_DDG_Pro.Areas.Admin.Controllers
             var lstLoai = db.ProductTypes.ToList();
             return View(lstLoai);
         }
+
+
+
+        [Route("ThemLoai")]
+        [HttpGet]
+
+        public IActionResult ThemLoai()
+        {
+            return View();
+        }
+        [Route("ThemLoai")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public IActionResult ThemLoai(ProductType Loai)
+        {
+            if (!ModelState.IsValid)
+            {
+                db.ProductTypes.Add(Loai);
+                db.SaveChanges();
+                return RedirectToAction("DanhMucLoai");
+            }
+            return View(Loai);
+        }
+            
+
+
+
 
 
         
