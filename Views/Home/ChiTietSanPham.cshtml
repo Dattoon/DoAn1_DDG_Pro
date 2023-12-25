@@ -98,11 +98,11 @@
                                                 </button>
                                             </div>
                                             <div class="addcart-area">
-                                                <button type="button" id="add-to-cart"
-                                                    class=" add-to-cartProduct button dark btn-addtocart addtocart-modal"
+                                            <a  asp-controller="Cart" asp-action="Add" asp-route-ProductId="@Model.ProductId" type="button" id="add-to-cart"
+                                                    class=" add-to-cartProduct button dark btn-addtocart addtocart-modal ButtonPro"
                                                     name="add">
                                                     Thêm vào giỏ
-                                                </button>
+                                                </a>
 
                                                 <button type="button" id="buy-now"
                                                     class="  button dark btn-buynow btnred addtocart-modal" name="add">

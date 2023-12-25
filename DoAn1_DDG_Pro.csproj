@@ -30,4 +30,12 @@
     <Folder Include="wwwroot\LayoutDDGSHOP\NewFolder\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\LayoutDDGSHOP\JS\app-combo.js" />
+    <None Include="wwwroot\LayoutDDGSHOP\JS\bootstrap.bundle.min.js" />
+    <None Include="wwwroot\LayoutDDGSHOP\JS\Function.js" />
+    <None Include="wwwroot\LayoutDDGSHOP\JS\jquery-3.5.1.min.js" />
+    <None Include="wwwroot\LayoutDDGSHOP\JS\scripts.js" />
+  </ItemGroup>
+
 </Project>

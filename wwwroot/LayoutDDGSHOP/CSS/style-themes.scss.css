@@ -13489,4 +13489,12 @@ table.table-cart tr td.item .ico-gift {
   .modal-productApp .modal-footer .button + .button {
     margin-top: 10px; } }
 
-   
+.ButtonPro {
+    width: 100%;
+    border-radius: 4px;
+    padding: 12px 20px;
+    outline: none;
+    font-weight: 600;
+    font-size: 15px;
+}
+   }

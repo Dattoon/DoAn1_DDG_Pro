@@ -2,6 +2,7 @@
 @model Product
 
 
+
 <div class="col-lg-cus5 col-md-6 col-6 product-loop" data-id="1104966306">
     <div class="product-inner" data-proid="1046543121" id="section_1_tab_1_loop_10">
         <div class="proloop-image">
@@ -36,6 +37,7 @@
                 <a asp-controller="Home" asp-action="ChiTietSanPham" asp-route-ProductId="@Model.ProductId" class="quickview-product">
                     @Model.ProductName
                 </a>
+                
             </h3>
             <div class="proloop--variant">
             </div>
@@ -47,7 +49,7 @@
             <div class="proloop-actions" data-vrid="1104966306">
                 <div class="proloop-actions__inner">
                     <div class="actions-primary">
-                        <button asp-action="Add" asp-controller="Cart" asp-route-ProductId="@Model.ProductId" type="submit" class="btn-proloop-cart add-to-cart">
+                        <button asp-controller="Cart" asp-action="Add" asp-route-ProductId="@Model.ProductId" type="submit" class="btn-proloop-cart add-to-cart">
                             <span class="btnico" title="Thêm vào giỏ">
                                 <svg class="btnico-first" viewBox="0 0 512 512">
                                     <g transform="translate(0 512) scale(.1 -.1)">
@@ -58,7 +60,7 @@
                                     </g>
                                 </svg>
                             </span>
-                            <span asp-action="Add" asp-controller="Cart" asp-route-ProductId="@Model.ProductId" class="btnadd"> Thêm vào giỏ </span>
+                            <a asp-controller="Cart" asp-action="Add" asp-route-ProductId="@Model.ProductId" class="btnadd"> Thêm vào giỏ </a>
                         </button>
                     </div>
                 </div>
@@ -66,3 +68,4 @@
         </div>
     </div>
 </div>
+

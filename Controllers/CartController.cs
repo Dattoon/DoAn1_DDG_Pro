@@ -28,21 +28,103 @@ namespace DoAn1_DDG_Pro.Controllers
 		{
 			Product product = await _shopDdgContext.Products.FindAsync(ProductId);
 			List<CartItemModel> carts = HttpContext.Session.GetJson<List<CartItemModel>>("Cart") ?? new List<CartItemModel>();
-			CartItemModel cartSP = carts.Where(x => x.ProductId == ProductId).FirstOrDefault();
+			CartItemModel cartItem = carts.Where(x => x.ProductId == ProductId).FirstOrDefault();
 
-
-			if (cartSP == null)
+			if (cartItem == null)
 			{
 				carts.Add(new CartItemModel(product));
 			}
 			else
 			{
-				cartSP.Quantity += 1;
+				cartItem.Quantity += 1;
 			}
 			HttpContext.Session.SetJson("Cart", carts);
-
+			TempData["success"] = "Bạn Đã Thêm Sản Phẩm Vào Giỏ Hàng";
 			return Redirect(Request.Headers["Referer"].ToString());
 		}
+
+		public async Task<IActionResult> Giam(int ProductId)
+		{
+			List<CartItemModel> carts = HttpContext.Session.GetJson<List<CartItemModel>>("Cart") ?? new List<CartItemModel>();
+
+			CartItemModel cartItem = carts.Where(x => x.ProductId == ProductId).FirstOrDefault();
+			if (cartItem.Quantity > 1)
+			{
+				--cartItem.Quantity;
+			}
+			else
+			{
+				carts.RemoveAll(x => x.ProductId == ProductId);
+			}
+
+
+			if (carts.Count == 0)
+			{
+				HttpContext.Session.Remove("Cart");
+			}
+			else
+			{
+				HttpContext.Session.SetJson("Cart", carts);
+			}
+
+			return RedirectToAction("Cart");
+
+
+		}
+		public async Task<IActionResult> Tang(int ProductId)
+		{
+			List<CartItemModel> carts = HttpContext.Session.GetJson<List<CartItemModel>>("Cart") ?? new List<CartItemModel>();
+
+			CartItemModel cartItem = carts.Where(x => x.ProductId == ProductId).FirstOrDefault();
+			if (cartItem.Quantity >= 1)
+			{
+				++cartItem.Quantity;
+			}
+			else
+			{
+				carts.RemoveAll(x => x.ProductId == ProductId);
+			}
+
+
+			if (carts.Count == 0)
+			{
+				HttpContext.Session.Remove("Cart");
+			}
+			else
+			{
+				HttpContext.Session.SetJson("Cart", carts);
+			}
+            
+            return RedirectToAction("Cart");
+
+
+		}
+
+		public async Task<IActionResult> Remove(int ProductId)
+		{
+			List<CartItemModel> carts = HttpContext.Session.GetJson<List<CartItemModel>>("Cart") ?? new List<CartItemModel>();
+			carts.RemoveAll(x=>x.ProductId == ProductId);
+			if (carts.Count == 0)
+			{
+				HttpContext.Session.Remove("Cart");
+			}
+			else
+			{
+				HttpContext.Session.SetJson("Cart", carts);
+			}
+			TempData["success"] = "Bạn Đã Xóa Sản Phẩm Khỏi Giỏ Hàng";
+            return RedirectToAction("Cart");
+		}
+		public async Task<IActionResult> Clear(int ProductId)
+		{
+			HttpContext.Session.Remove("Cart");
+			return RedirectToAction("Cart");
+		}
+
+
+
+
+
 
 	}
 }
