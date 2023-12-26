@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace DoAn1_DDG_Pro.Models;
 
-public partial class ShopDdgContext : DbContext
+public partial class ShopDdgContext : IdentityDbContext<AppUserModel>
 {
     public ShopDdgContext()
     {
