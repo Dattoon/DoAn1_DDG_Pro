@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_LayoutDDG.cshtml";
+}
+@model UserModel
+
+<main class="wrapperMain_content">
+    <div class="layout-account">
+        <div class="container">
+            <div class="wrapbox-content-account">
+                <div class="userbox customers_accountForm">
+                    <div class="tab-form-account d-flex align-items-center justify-content-center">
+                        <h4>
+                            <a asp-action="Login" asp-controller="Account">Đăng nhập</a>
+                        </h4>
+                        <h4 class="active">
+                            <a asp-action="Register" asp-controller="Account">Đăng ký</a>
+                        </h4> 
+                    </div>
+                    @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+                    {
+                        <input name="form_type" type="hidden" value="create_customer">
+                        <input name="utf8" type="hidden" value="✓">
+
+
+                        <div id="field-name" class="clearfix large_form">
+                            <label for="last_name" class="label icon-field">
+                                <i class="icon-login icon-user "></i>
+                            </label>
+
+                            @Html.TextBoxFor(temp => temp.UserName, new { @class = "text", @size = "30" })
+                            @Html.ValidationMessageFor(temp => temp.UserName)
+                        </div>
+
+
+                        <div id="field-birthday" class="clearfix large_form">
+                            <label for="birthday" class="label icon-field">
+                                <i class="icon-login icon-envelope "></i>
+                            </label>
+
+                            @Html.TextBoxFor(temp => temp.DateOfBirth, new { @class = "text", size = "30", placeholder = "mm/dd/yyyy" })
+                            @Html.ValidationMessageFor(temp => temp.DateOfBirth)
+                        </div>
+                        <div id="field-email" class="clearfix large_form">
+                            <label for="email" class="label icon-field">
+                                <i class="icon-login icon-envelope "></i>
+                            </label>
+
+                            @Html.TextBoxFor(temp => temp.Email, new { @class = "text", size = "30", placeholder = "Email" })
+                            @Html.ValidationMessageFor(temp => temp.Email)
+                        </div>
+                        <div id="field-password" class="clearfix large_form large_form-mrb">
+                            <label for="password" class="label icon-field">
+                                <i class="icon-login icon-shield "></i>
+                            </label>
+
+                            @Html.TextBoxFor(temp => temp.Password, new { @class = "password text", size = "30", placeholder = "Mật khẩu" })
+                            @Html.ValidationMessageFor(temp => temp.Password)
+                        </div>
+                        
+                        <div class="clearfix custommer_account_action">
+                            <div class="action_bottom button dark">
+
+                                <button class="btn" type="submit">Đăng ký</button>
+                            </div>
+                            <div class="req_pass">
+                                Bạn đã có tài khoản? <a asp-action="Login" asp-controller="Account">Đăng nhập ngay</a>
+                            </div>
+                        </div>
+                    }
+                    <!-- #register -->
+                    <!-- #customer-register -->
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

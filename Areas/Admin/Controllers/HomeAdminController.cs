@@ -91,7 +91,7 @@ namespace DoAn1_DDG_Pro.Areas.Admin.Controllers
         public IActionResult XoaSanPham(int ProductID)
         {
             TempData["Message"] = "";
-            var anhSanPhams = db.ProductImages.Where(x => x.ProductId==ProductID);
+            var anhSanPhams = db.Products.Where(x => x.ProductId==ProductID);
             if (anhSanPhams.Any()) db.RemoveRange(anhSanPhams);
             db.Remove(db.Products.Find(ProductID));
             db.SaveChanges();

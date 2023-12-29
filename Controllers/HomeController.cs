@@ -2,7 +2,7 @@
 using Azure;
 using DoAn1_DDG_Pro.Models;
 using DoAn1_DDG_Pro.Models.Authentication;
-using DoAn1_DDG_Pro.ViewModels;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +21,7 @@ namespace DDG_shop.Controllers
         {
             _logger = logger;
         }
-        [Authentication]
+        
         public IActionResult Index(string q, int? page)
         {
             int pageSize = 5;
@@ -40,7 +40,7 @@ namespace DDG_shop.Controllers
 
 
 
-        [Authentication]
+       
         public IActionResult SanPhamTheoLoai(string TypeId, int? page)
         {
             int pageSize = 5;
@@ -50,11 +50,10 @@ namespace DDG_shop.Controllers
             return View(lst);
         }
 
-        [Authentication]
         public IActionResult ChiTietSanPham (int ProductId ) 
         {
             var sanPham=db.Products.SingleOrDefault(x=>x.ProductId==ProductId);
-            var anhSanPham=db.ProductImages.Where(x=>x.ProductId==ProductId).ToList();
+            var anhSanPham=db.Products.Where(x=>x.ProductId==ProductId).ToList();
             ViewBag.anhSanPham = anhSanPham;
             return View(sanPham);
         }
@@ -80,18 +79,7 @@ namespace DDG_shop.Controllers
             }
         }
 
-        public IActionResult ProductDetail (int ProductId)
-        {
-            var sanPham = db.Products.SingleOrDefault(x => x.ProductId == ProductId);
-            var anhSanPham = db.ProductImages.Where(x => x.ProductId == ProductId).ToList();
-            var homeProductDetailViewModel = new HomeProductDetailViewModel
-            {
-                SanPham = sanPham,
-                anhSps = anhSanPham,
-            };
-
-            return View(homeProductDetailViewModel);
-        }
+       
 
 
         public IActionResult Privacy()

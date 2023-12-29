@@ -125,9 +125,17 @@
                                                 </span>
                                                
                                             </button>
-                                            <a asp-controller="Access" asp-action="Logout">Logout</a>
-                                            <a asp-controller="Cart" asp-action="Cart">    CartTest</a>
+                                          
                                             
+                                            @if(User.Identity?.IsAuthenticated ?? false)
+                                            {
+                                                <a class="txtbl" asp-controller="Account" asp-action="Logout">Hi, @User.Identity.Name Logout</a>
+                                            }
+                                            else{
+                                                <a class="txtbl" asp-controller="Account" asp-action="Login">Login</a>
+                                            }
+
+
                                         </div>
 
                                     </div>
@@ -366,6 +374,7 @@
 
 
     <script src="~/LayoutDDGSHOP/JS/Function.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 
 </html>

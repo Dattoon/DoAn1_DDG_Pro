@@ -116,7 +116,15 @@
 									</div>
 								</div>
 								<div class="summary-button">
+								@if (User.Identity?.IsAuthenticated ?? false)
+								{
 									<a id="btnCart-checkout" class="checkout-btn btnred " href="#">THANH TOÁN </a>
+								}
+								else
+								{
+									<a id="btnCart-checkout" class="checkout-btn btnblack " href="#">THANH TOÁN </a>
+								}
+
 								</div>
 							</div>
 							<div class="order-summary-block order-summary-notify ">

@@ -1,0 +1,124 @@
+﻿@using DoAn1_DDG_Pro.Models.ViewModels;
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_LayoutDDG.cshtml";
+}
+@model LoginViewModel
+<main class="wrapperMain_content">
+    <div class="layout-account">
+        <div class="container">
+            <div class="wrapbox-content-account">
+                <div id="customer-login" class="customers_accountForm customer_login">
+                    <div class="tab-form-account d-flex align-items-center justify-content-center">
+                        <h4 class="active">
+                            <a asp-action="Login" asp-controller="Account">Đăng nhập</a>
+                        </h4>
+                        <h4>
+                            <a asp-action="Register" asp-controller="Account">Đăng ký</a>
+                        </h4>
+                    </div>
+                    <div id="login">
+                        <div class="accounttype">
+                            <h2 class="title"></h2>
+                        </div>
+                        <!-- <form accept-charset="UTF-8" action="/account/login" id="customer_login" method="post"></form> -->
+                        @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+                        {
+                            <input name="form_type" type="hidden" value="customer_login">
+                            <input name="utf8" type="hidden" value="✓">
+
+
+                            <div class="clearfix large_form">
+                                <label for="customer_email" class="icon-field">
+                                    <i class="icon-login icon-envelope "></i>
+                                </label>
+                                <!-- <input required="" type="email" value="" name="customer[email]" id="customer_email"
+                                placeholder="Vui lòng nhập email của bạn" class="text"> -->
+                                @Html.TextBoxFor(x => x.UserName, new { @class = "text ", placeholder = "User Name", required = "required", autofocus = "autofocus" })
+                            </div>
+
+                            <div class="clearfix large_form large_form-mrb">
+                                <label for="customer_password" class="icon-field">
+                                    <i class="icon-login icon-shield"></i>
+                                </label>
+                                <!--
+                                <input required="" type="password" value="" name="customer[password]"
+                                                                        id="customer_password" placeholder="Vui lòng nhập mật khẩu" class="text"
+                                                                        size="16"> -->
+                                @Html.TextBoxFor(x => x.Password, new { placeholder = "Vui lòng nhập mật khẩu", @class = "text", size = "16" })
+                            </div>
+
+
+                            <div class="clearfix custommer_account_action">
+                                <div class="action_bottom button">
+                                    <!-- <input class="btn btn-signin" type="submit" value="Đăng nhập"> -->
+                                    <button class="btn btn-signin" type="submit">Đăng nhập</button>
+                                </div>
+                                <div class="req_pass">
+                                    <p>
+                                        Bạn chưa có tài khoản?<a href="#"
+                                                                 onclick="showRecoverPasswordForm();return false;" title="Quên mật khẩu">
+                                            Quên mật khẩu?
+                                        </a>
+                                    </p>
+                                    <p>
+                                        Bạn quên mật khẩu?<a href="/Register.html" title="Đăng ký"> Đăng ký</a>
+                                    </p>
+                                </div>
+                            </div>
+
+
+
+                        }<!-- </form> -->
+                    </div>
+                    <div id="recover-password" style="display:none;">
+                        <!--<div class="accounttype"><h2>Phục hồi mật khẩu</h2></div>	-->
+
+                        <form accept-charset="UTF-8" action="/account/recover" method="post">
+                            <input name="form_type" type="hidden" value="recover_customer_password">
+                            <input name="utf8" type="hidden" value="✓">
+
+
+                            <div class="clearfix large_form large_form-mrb">
+                                <label for="email" class="icon-field">
+                                    <i class="icon-login icon-envelope "></i>
+                                </label>
+                                <input type="email" value="" size="30" name="email"
+                                       placeholder="Vui lòng nhập email của bạn" id="recover-email" class="text">
+                            </div>
+                           
+                            <div class="clearfix custommer_account_action">
+                                <div class="action_bottom button dark">
+                                    <input class="btn" type="submit" value="Gửi email">
+                                </div>
+                                <div class="req_pass">
+                                    Quay lại <a href="#"
+                                                onclick="hideRecoverPasswordForm();return false;">đăng nhập</a>
+                                </div>
+                            </div>
+
+                            <input id="8f65d9e480934c749adcc2fb6dfcb509" name="g-recaptcha-response" type="hidden"
+                                   value="03AFcWeA5mgPoVLmTyxrZWWKlcnRd9hhGvxhc3idXwdz46QQoHFYL7SuraH-2tGNANjlngBNpS4ZXNBJXOezK_OogCBf56GkaDKnovB6M_okoawgSLdUXug9asMMZqvY6jyAamg1QdqnXNypQ2TVr0bq_cUsOoQwadZl6TiBtfTiVYqLNNnIeHATUEdbTuFHrOPsalOZtIY5Py5QsQGjAZTIQd4Slf2kuU2jlFt1XS2YGJ-lGGnHjgKKDjZmMpEeHS2kNR5Y08GkOyxUOU52MjQK0kfj2M1omn_ORs5TijNRS1fHFL-k_773p_pGuvVD0zCAjWFrsjntWyCtazUngBp0-8MX-fiCpTUO5HDtYIsr-dlfycbhdRld4ct4UQWT7k8eQQkYwZ4iP5vqmr8OsdNIRBIYDnWDpvFG2F2OErHt5ArAdmO942GTVFiQNz0oJ2bZzxusUPxd9moeuhvbHeJj6um0XoRyAzsfuYscTzS2TYnX4wxJs0ixBQj2WjPyuiRO5tpsuRefFDbyrRvHBssEO8eF54RhrkhPyr2u5FyGlHiTflI2Z6OFCid_Iy4XTM7U8YnfHR_MdFnfA5kGh7PKA9AePxs3AJf0xbjDqLGKrCVpHKxes6jpsUxyV37PUSb4WVptNan7xO">
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="text/javascript">
+        function showRecoverPasswordForm() {
+            document.getElementById('recover-password').style.display = 'block';
+            document.getElementById('login').style.display = 'none';
+        }
+
+        function hideRecoverPasswordForm() {
+            document.getElementById('recover-password').style.display = 'none';
+            document.getElementById('login').style.display = 'block';
+        }
+
+        if (window.location.hash == '#recover') { showRecoverPasswordForm() }
+    </script>
+</main>
