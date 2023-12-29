@@ -50,7 +50,7 @@
 														</div>
 														<div class="item-price">
 															<p>
-																<a>@item.Price VND</a>
+																<a>@item.Price.ToString("#,###") VND</a>
 
 
 
@@ -60,7 +60,7 @@
 													<div class="media-total">
 														<div class="item-total-price">
 															<div class="price">
-																<span class="line-item-total">@Model.CartItems.Where(x => x.ProductId == @item.ProductId).Sum(x => x.Quantity * x.Price)</span>
+																<span class="line-item-total">@Model.CartItems.Where(x => x.ProductId == @item.ProductId).Sum(x => x.Quantity * x.Price).ToString("#,###")</span>
 															</div>
 														</div>
 														<div class="item-qty">
@@ -108,7 +108,7 @@
 
 
 								<div class="summary-total">
-									<p>Tổng tiền: <span>@Model.Total</span></p>
+									<p>Tổng tiền: <span>@Model.Total.ToString("#,###")</span></p>
 								</div>
 								<div class="summary-action">
 									<p>Phí vận chuyển sẽ được tính ở trang thanh toán.</p><p>Bạn cũng có thể nhập mã giảm giá ở trang thanh toán.</p><p>Bạn cũng có thể nhập mã giảm giá ở trang thanh toán.</p>									<div class="summary-alert alert alert-danger ">

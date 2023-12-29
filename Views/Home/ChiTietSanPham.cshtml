@@ -45,9 +45,9 @@
                                 <div class="wrapbox-detail">
                                     <div class="product-price" id="price-preview">
                                         <span class="pro-title">Giá: </span>
-                                        <span class="pro-price">@Model.Price VND</span> 
+                                    <span class="pro-price">@Model.Price.ToString("#,###") VND</span>
 
-                                    </div>
+                                </div>
                                     <div class="product-variants" style="display:none">
                                         <form id="add-item-form" action="/cart/add" method="post"
                                             class="variants clearfix">
