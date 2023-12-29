@@ -1,4 +1,6 @@
-﻿using DoAn1_DDG_Pro.Models;
+﻿using DoAn1_DDG_Pro.Identity;
+using DoAn1_DDG_Pro.Models;
+using DoAn1_DDG_Pro.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -6,13 +8,13 @@ namespace DoAn1_DDG_Pro.Controllers
 {
 	public class CheckoutController : Controller
 	{
-		private readonly Datacontext _datacontext;
+		private readonly AppDbContext _datacontext;
 
-		public CheckoutController(Datacontext context)
+		public CheckoutController(AppDbContext context)
 		{
 			_datacontext = context;
 		}
-		public async Task<IActionResult> Checkout()
+		public async Task<IActionResult> Checkout(OrderDetails orderDetails)
 		{
 			var userEmail = User.FindFirstValue(ClaimTypes.Email);
 			if (userEmail == null)
@@ -29,8 +31,21 @@ namespace DoAn1_DDG_Pro.Controllers
 				OrderItem.CreatedDate = DateTime.Now;
 				_datacontext.Add(OrderItem);
 				_datacontext.SaveChanges();
-
-
+				List<CartItemModel> cartItems = HttpContext.Session.GetJson<List<CartItemModel>>("Cart") ?? new List<CartItemModel>();
+				foreach (var cartItem in cartItems)
+				{
+					var Orders = new OrderDetails();
+					orderDetails.UserName = userEmail;
+					orderDetails.OrderCode = OrderCode;
+					orderDetails.ProductId = cartItem.ProductId;
+					orderDetails.Price = cartItem.Price;
+					orderDetails.Quantity = cartItem.Quantity;
+					_datacontext.Add(orderDetails);
+					_datacontext.SaveChanges();
+				}
+				HttpContext.Session.Remove("Cart");
+				TempData["success"] = "Đặc hàng thành công, Vui lòng chờ duyệt";
+				return RedirectToAction("Cart","Cart");
 			}
 			return View();
 		}

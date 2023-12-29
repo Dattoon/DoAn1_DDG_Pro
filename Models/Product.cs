@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DoAn1_DDG_Pro.Models;
 
@@ -9,11 +10,12 @@ public partial class Product
 
     public string? ProductName { get; set; }
 
-    
 
-    public decimal? Price { get; set; }
 
-    public int? Quantity { get; set; }
+	[Column(TypeName = "decimal(18,0)")]
+	public decimal Price { get; set; }
+
+	public int? Quantity { get; set; }
 
     public string? Description { get; set; }
 

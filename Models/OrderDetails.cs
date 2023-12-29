@@ -1,4 +1,6 @@
-﻿namespace DoAn1_DDG_Pro.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace DoAn1_DDG_Pro.Models
 {
 	public class OrderDetails
 	{
@@ -10,9 +12,11 @@
 
 		public int ProductId { get; set; }
 
+		[Column(TypeName = "decimal(18,0)")]
 		public decimal Price { get; set; }
 
 		public int Quantity { get; set; }
+
 		
 	}
 }

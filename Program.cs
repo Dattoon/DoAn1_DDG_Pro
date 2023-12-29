@@ -74,6 +74,10 @@ internal class Program
             name: "default",
             pattern: "{controller=Home}/{action=Index}/{id?}");
 
+        app.MapControllerRoute(
+        name: "Admin",
+        pattern: "{area:exists}/{controller=HomeAdmin}/{action=Index}/{id?}");
+
         app.Run();
     }
 }

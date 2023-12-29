@@ -16,5 +16,10 @@ namespace DoAn1_DDG_Pro.Identity
 		public DbSet<OrderDetails> OrderModel { get; set; }
 
 		public DbSet<OrderModel> OrderDetails { get; set; }
+
+		public DbSet<Product> products { get; set; }
+
+
+
 	}
 }

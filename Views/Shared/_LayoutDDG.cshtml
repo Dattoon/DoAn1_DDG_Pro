@@ -63,15 +63,7 @@
                                         </form>
 
 
-                                        @* <div id="ajaxSearchResults-3" class="smart-search-wrapper ajaxSearchResults"
-                                             style="display: none">
-                                            <div class="resultsContent"></div>
-                                            <div class="search-suggest">
-                                                <p>Gợi ý cho bạn: </p>
-                                                <ul>
-                                                </ul>
-                                            </div>
-                                        </div> *@
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -160,65 +152,17 @@
                                                         </svg>
                                                     </span>
                                                     <span class="count-holder">
-                                                        <span class="count">0</span>
+                                                        <span class="count"></span>
                                                     </span>
                                                 </span>
                                                 <span class="box-text">
-                                                    <span class="txtbl">Giỏ hàng</span>
+                                                    <a asp-action="Cart" asp-controller="Cart" class="txtbl">Giỏ hàng</a>
                                                 </span>
                                             </button>
-                                            <span class="box-triangle">
-                                                <svg viewBox="0 0 20 9" role="presentation">
-                                                    <path d="M.47108938 9c.2694725-.26871321.57077721-.56867841.90388257-.89986354C3.12384116 6.36134886 5.74788116 3.76338565 9.2467995.30653888c.4145057-.4095171 1.0844277-.40860098 1.4977971.00205122L19.4935156 9H.47108938z"
-                                                          fill="#ffffff"></path>
-                                                </svg>
-                                            </span>
+                                            
                                         </div>
 
-                                        <div class="header-action_dropdown">
-                                            <div class="header-dropdown_content">
-                                                <div class="sitenav-content sitenav-cart">
-                                                    <p class="boxtitle">Giỏ hàng</p>
-                                                    <div class="cart-view clearfix">
-                                                        <div class="cart-view-scroll">
-                                                            <table class="clone-item-cart table-clone-cart">
-                                                            </table>
-                                                            <table class="table-cart-view">
-                                                                
-
-
-                                                            </table>
-                                                        </div>
-                                                        <div class="cart-view-line"></div>
-                                                        <div class="cart-view-total">
-                                                            <table class="table-total">
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td class="mnc-total text-left">TỔNG TIỀN:</td>
-                                                                        <td class="mnc-total text-right total-view-cart">
-                                                                            <span>0</span><span>đ</span>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr class="mini-cart__button">
-                                                                        <td colspan="2">
-                                                                            <a asp-controller="Cart" asp-action="Cart"
-                                                                               class="linktocart button ">
-                                                                                Xem giỏ
-                                                                                hàng
-                                                                            </a>
-                                                                        </td>
-
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-
-                                            </div>
-                                        </div>
+                                       
                                     </div>
 
                                     
