@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DoAn1_DDG_Pro.Models;
@@ -25,5 +26,12 @@ public partial class Product
 
     public string? Imgbot { get; set; }
 
+    [NotMapped]
+    [FileExtensions]
+    public IFormFile ImgUpLoad { get; set; }
+
     public virtual ProductType? Type { get; set; }
+
+
+
 }

@@ -57,6 +57,8 @@ namespace DoAn1_DDG_Pro.Areas.Admin.Controllers
             return View(sanPham);
         }
 
+        
+
         [Route("SuaSanPham")]
         [HttpGet]
         public IActionResult SuaSanPham(int ProductID)
