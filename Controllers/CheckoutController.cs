@@ -2,6 +2,7 @@
 using DoAn1_DDG_Pro.Models;
 using DoAn1_DDG_Pro.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace DoAn1_DDG_Pro.Controllers
@@ -29,8 +30,14 @@ namespace DoAn1_DDG_Pro.Controllers
 				OrderItem.UserName = userEmail;
 				OrderItem.Status = 1;
 				OrderItem.CreatedDate = DateTime.Now;
-				_datacontext.Add(OrderItem);
-				_datacontext.SaveChanges();
+
+                _datacontext.Add(OrderItem);
+                _datacontext.Database.ExecuteSqlInterpolated($"SET IDENTITY_INSERT OrderModel ON;");
+                _datacontext.SaveChanges();
+                _datacontext.Database.ExecuteSqlInterpolated($"SET IDENTITY_INSERT OrderModel OFF");
+
+               
+
 				List<CartItemModel> cartItems = HttpContext.Session.GetJson<List<CartItemModel>>("Cart") ?? new List<CartItemModel>();
 				foreach (var cartItem in cartItems)
 				{
@@ -41,7 +48,11 @@ namespace DoAn1_DDG_Pro.Controllers
 					orderDetails.Price = cartItem.Price;
 					orderDetails.Quantity = cartItem.Quantity;
 					_datacontext.Add(orderDetails);
-					_datacontext.SaveChanges();
+
+                    _datacontext.Database.ExecuteSqlInterpolated($"SET IDENTITY_INSERT OrderDetails ON;");
+                    _datacontext.SaveChanges();
+                    _datacontext.Database.ExecuteSqlInterpolated($"SET IDENTITY_INSERT OrderDetails OFF");
+                    
 				}
 				HttpContext.Session.Remove("Cart");
 				TempData["success"] = "Đặc hàng thành công, Vui lòng chờ duyệt";

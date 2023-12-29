@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DoAn1_DDG_Pro.Repository.Validation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -25,9 +26,9 @@ public partial class Product
     public string? Imgtop { get; set; }
 
     public string? Imgbot { get; set; }
-
+    
     [NotMapped]
-    [FileExtensions]
+    [FileExtension]
     public IFormFile ImgUpLoad { get; set; }
 
     public virtual ProductType? Type { get; set; }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DoAn1_DDG_Pro.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231229020740_Datoon")]
-    partial class Datoon
+    [Migration("20231229144826_SSD")]
+    partial class SSD
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
