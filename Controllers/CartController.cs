@@ -14,7 +14,14 @@ namespace DoAn1_DDG_Pro.Controllers
             _shopDdgContext = shopDdgContext;
         }
 
-		public IActionResult Cart()
+        public IActionResult OrderForm()
+        {
+          
+            return View("OrderForm");
+        }
+
+
+        public IActionResult Cart()
 		{
 			List<CartItemModel> cartItems = HttpContext.Session.GetJson<List<CartItemModel>>("Cart") ?? new List<CartItemModel>();
 			CartItemViewModels cartVM = new()
@@ -120,11 +127,10 @@ namespace DoAn1_DDG_Pro.Controllers
 			HttpContext.Session.Remove("Cart");
 			return RedirectToAction("Cart");
 		}
+      
 
 
 
 
-
-
-	}
+    }
 }

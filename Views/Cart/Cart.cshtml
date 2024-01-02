@@ -118,12 +118,9 @@
 								<div class="summary-button">
 								@if (User.Identity?.IsAuthenticated ?? false)
 								{
-									<a id="btnCart-checkout" class="checkout-btn btnred " asp-controller="Checkout" asp-action="Checkout">THANH TOÁN </a>
+									<a id="btnCart-checkout" class="checkout-btn btnred " asp-action="OrderForm">THANH TOÁN </a>
 								}
-								else
-								{
-									<a id="btnCart-checkout" class="checkout-btn btnblack " href="#">THANH TOÁN </a>
-								}
+								
 
 								</div>
 							</div>
