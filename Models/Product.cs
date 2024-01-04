@@ -31,6 +31,10 @@ public partial class Product
     [FileExtension]
     public IFormFile ImgUpLoad { get; set; }
 
+    [NotMapped]
+    [FileExtension]
+    public IFormFile ImgUpLoad2 { get; set; }
+
     public virtual ProductType? Type { get; set; }
 
 

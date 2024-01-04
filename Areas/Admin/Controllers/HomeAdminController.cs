@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using X.PagedList;
+using DoAn1_DDG_Pro.Identity;
+using DoAn1_DDG_Pro.Repository;
+
 
 namespace DoAn1_DDG_Pro.Areas.Admin.Controllers
 {
@@ -11,7 +14,17 @@ namespace DoAn1_DDG_Pro.Areas.Admin.Controllers
     [Route("admin/homeadmin")]
     public class HomeAdminController : Controller
     {
-        ShopDdgContext db = new ShopDdgContext();
+        
+        
+
+        private readonly AppDbContext _db;
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
+        public HomeAdminController(AppDbContext db, IWebHostEnvironment webHostEnvironment)
+        {
+            _db = db;
+            _webHostEnvironment = webHostEnvironment;
+        }
         [Route("")]
         [Route("index")]
         public IActionResult Index()
@@ -23,7 +36,7 @@ namespace DoAn1_DDG_Pro.Areas.Admin.Controllers
         {
             int pageSize = 10;
             int pageNumber = page == null || page < 0 ? 1 : page.Value;
-            var lstsanpham = db.Products.AsNoTracking();
+            var lstsanpham = _db.products.AsNoTracking();
 
             if (!String.IsNullOrEmpty(q))
             {
@@ -39,19 +52,41 @@ namespace DoAn1_DDG_Pro.Areas.Admin.Controllers
         public IActionResult ThemSanPhamMoi()
            
         {
-            ViewBag.TypeId=new SelectList(db.ProductTypes.ToList(),"TypeId","TypeName");
+            ViewBag.TypeId=new SelectList(_db.ProductType.ToList(),"TypeId","TypeName");
             return View();
 
         }
         [Route("ThemSanPhamMoi")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult ThemSanPhamMoi(Product sanPham)
+        public async Task<IActionResult> ThemSanPhamMoi(Product sanPham)
         {
             if (ModelState.IsValid)
             {
-                db.Products.Add(sanPham);
-                db.SaveChanges();
+                if (sanPham.ImgUpLoad != null)
+                {
+                    string uploadsDir = Path.Combine(_webHostEnvironment.WebRootPath, "Media/main");
+                    string imageName = Guid.NewGuid().ToString() + "_" +sanPham.ImgUpLoad.FileName ;
+                    string filePath =Path.Combine(uploadsDir, imageName);
+
+                    FileStream fs =new FileStream(filePath, FileMode.Create);
+                    await sanPham.ImgUpLoad.CopyToAsync(fs);
+                    fs.Close();
+                    sanPham.Imgtop = imageName;
+                }
+                if (sanPham.ImgUpLoad2 != null)
+                {
+                    string uploadsDir = Path.Combine(_webHostEnvironment.WebRootPath, "Media/bonus");
+                    string imageName = Guid.NewGuid().ToString() + "_" + sanPham.ImgUpLoad2.FileName;
+                    string filePath = Path.Combine(uploadsDir, imageName);
+
+                    FileStream fs = new FileStream(filePath, FileMode.Create);
+                    await sanPham.ImgUpLoad2.CopyToAsync(fs);
+                    fs.Close();
+                    sanPham.Imgbot = imageName;
+                }
+                _db.products.Add(sanPham);
+                _db.SaveChanges();
                 return RedirectToAction("DanhMucSanPham");
             }
             return View(sanPham);
@@ -64,8 +99,8 @@ namespace DoAn1_DDG_Pro.Areas.Admin.Controllers
         public IActionResult SuaSanPham(int ProductID)
 
         {
-            ViewBag.TypeId = new SelectList(db.ProductTypes.ToList(), "TypeId", "TypeName");
-            var sanPham = db.Products.Find(ProductID);
+            ViewBag.TypeId = new SelectList(_db.ProductType.ToList(), "TypeId", "TypeName");
+            var sanPham = _db.products.Find(ProductID);
 
             return View(sanPham);
 
@@ -75,12 +110,35 @@ namespace DoAn1_DDG_Pro.Areas.Admin.Controllers
         [Route("SuaSanPham")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult SuaSanPham(Product sanPham)
+        public async Task<IActionResult> SuaSanPham(int ProductID, Product sanPham)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(sanPham).State = EntityState.Modified;
-                db.SaveChanges();
+
+                if (sanPham.ImgUpLoad != null)
+                {
+                    string uploadsDir = Path.Combine(_webHostEnvironment.WebRootPath, "Media/main");
+                    string imageName = Guid.NewGuid().ToString() + "_" + sanPham.ImgUpLoad.FileName;
+                    string filePath = Path.Combine(uploadsDir, imageName);
+
+                    FileStream fs = new FileStream(filePath, FileMode.Create);
+                    await sanPham.ImgUpLoad.CopyToAsync(fs);
+                    fs.Close();
+                    sanPham.Imgtop = imageName;
+                }
+                if (sanPham.ImgUpLoad2 != null)
+                {
+                    string uploadsDir = Path.Combine(_webHostEnvironment.WebRootPath, "Media/bonus");
+                    string imageName = Guid.NewGuid().ToString() + "_" + sanPham.ImgUpLoad2.FileName;
+                    string filePath = Path.Combine(uploadsDir, imageName);
+
+                    FileStream fs = new FileStream(filePath, FileMode.Create);
+                    await sanPham.ImgUpLoad2.CopyToAsync(fs);
+                    fs.Close();
+                    sanPham.Imgbot = imageName;
+                }
+                _db.Entry(sanPham).State = EntityState.Modified;
+                _db.SaveChanges();
                 return RedirectToAction("DanhMucSanPham", "HomeAdmin");
             }
             return View(sanPham);
@@ -93,10 +151,10 @@ namespace DoAn1_DDG_Pro.Areas.Admin.Controllers
         public IActionResult XoaSanPham(int ProductID)
         {
             TempData["Message"] = "";
-            var anhSanPhams = db.Products.Where(x => x.ProductId==ProductID);
-            if (anhSanPhams.Any()) db.RemoveRange(anhSanPhams);
-            db.Remove(db.Products.Find(ProductID));
-            db.SaveChanges();
+            var anhSanPhams = _db.products.Where(x => x.ProductId==ProductID);
+            if (anhSanPhams.Any()) _db.RemoveRange(anhSanPhams);
+            _db.Remove(_db.products.Find(ProductID));
+            _db.SaveChanges();
             TempData["Message"] = "Sản Phẩm Đã Được Xóa";
             return RedirectToAction("DanhMucSanPham", "HomeAdmin");
         }
@@ -104,7 +162,7 @@ namespace DoAn1_DDG_Pro.Areas.Admin.Controllers
         [Route("danhmucloai")]
         public  IActionResult DanhMucLoai()
         {
-            var lstLoai = db.ProductTypes.ToList();
+            var lstLoai = _db.ProductType.ToList();
             return View(lstLoai);
         }
 
@@ -125,8 +183,8 @@ namespace DoAn1_DDG_Pro.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                db.ProductTypes.Add(Loai);
-                db.SaveChanges();
+                _db.ProductType.Add(Loai);
+                _db.SaveChanges();
                 return RedirectToAction("DanhMucLoai");
             }
             return View(Loai);

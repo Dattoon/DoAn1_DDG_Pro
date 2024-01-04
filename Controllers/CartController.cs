@@ -3,15 +3,16 @@ using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow;
 using DoAn1_DDG_Pro.Models;
 using DoAn1_DDG_Pro.Repository;
 using DoAn1_DDG_Pro.Models.ViewModels;
+using DoAn1_DDG_Pro.Identity;
 
 namespace DoAn1_DDG_Pro.Controllers
 {
     public class CartController : Controller
     {
-        private readonly ShopDdgContext _shopDdgContext;
-        public CartController(ShopDdgContext shopDdgContext)
+        private readonly AppDbContext _AppDbContext;
+        public CartController(AppDbContext AppDbContext)
         {
-            _shopDdgContext = shopDdgContext;
+            _AppDbContext = AppDbContext;
         }
         
         public IActionResult OrderForm()
@@ -38,7 +39,7 @@ namespace DoAn1_DDG_Pro.Controllers
 		}
 		public async Task<IActionResult> Add(int ProductId)
 		{
-			Product product = await _shopDdgContext.Products.FindAsync(ProductId);
+			Product product = await _AppDbContext.products.FindAsync(ProductId);
 			List<CartItemModel> carts = HttpContext.Session.GetJson<List<CartItemModel>>("Cart") ?? new List<CartItemModel>();
 			CartItemModel cartItem = carts.Where(x => x.ProductId == ProductId).FirstOrDefault();
 

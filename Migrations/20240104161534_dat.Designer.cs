@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DoAn1_DDG_Pro.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240104151020_DDGSHOP")]
-    partial class DDGSHOP
+    [Migration("20240104161534_dat")]
+    partial class dat
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

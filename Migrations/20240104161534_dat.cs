@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DoAn1_DDG_Pro.Migrations
 {
     /// <inheritdoc />
-    public partial class DDGSHOP : Migration
+    public partial class dat : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

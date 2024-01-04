@@ -15,10 +15,7 @@ internal class Program
         // Add services to the container.
         builder.Services.AddControllersWithViews();
 
-        var connectionString = builder.Configuration.GetConnectionString("ShopDdgContext");
-        builder.Services.AddDbContext<ShopDdgContext>(x => x.UseSqlServer(connectionString));
-
-        var connectionString2 = builder.Configuration.GetConnectionString("DataIden");
+        var connectionString2 = builder.Configuration.GetConnectionString("AppDbContext");
         builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString2));
 
 

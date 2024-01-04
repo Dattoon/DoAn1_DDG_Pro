@@ -1,10 +1,12 @@
 ﻿using DoAn1_DDG_Pro.Models;
+using DoAn1_DDG_Pro.Identity;
 namespace DoAn1_DDG_Pro.Repository
+
 {
     public class LoaiSpRepository : ILoaiSpRepository
     {
-        private readonly ShopDdgContext _context;
-        public LoaiSpRepository (ShopDdgContext context)
+        private readonly AppDbContext _context;
+        public LoaiSpRepository (AppDbContext context)
         {
             _context = context;
         }
@@ -17,7 +19,7 @@ namespace DoAn1_DDG_Pro.Repository
         
         public IEnumerable<ProductType> GetAll()
         {
-            return _context.ProductTypes;
+            return _context.ProductType;
         }
         
 
@@ -35,7 +37,7 @@ namespace DoAn1_DDG_Pro.Repository
 
         public ProductType Get(string typeId)
         {
-            return _context.ProductTypes.Find(typeId);
+            return _context.ProductType.Find(typeId);
         }
 
     }

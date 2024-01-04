@@ -9,24 +9,27 @@ using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using X.PagedList;
+using DoAn1_DDG_Pro.Identity;
 
 namespace DDG_shop.Controllers
 {
     public class HomeController : Controller
     {
-        ShopDdgContext db = new ShopDdgContext();
+        private readonly AppDbContext _db;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(AppDbContext db, ILogger<HomeController> logger)
         {
+            _db = db;
             _logger = logger;
         }
-        
+
+
         public IActionResult Index(string q, int? page)
         {
             int pageSize = 5;
             int pageNumber = page == null || page < 0 ? 1 : page.Value;
-            var lstsanpham = db.Products.AsNoTracking();
+            var lstsanpham = _db.products.AsNoTracking();
 
             if (!String.IsNullOrEmpty(q))
             {
@@ -45,15 +48,15 @@ namespace DDG_shop.Controllers
         {
             int pageSize = 5;
             int pageNumber = page == null || page < 0 ? 1 : page.Value;
-            var lstsanpham = db.Products.AsNoTracking().Where(x=>x.TypeId==TypeId).OrderBy(x => x.ProductName);
+            var lstsanpham = _db.products.AsNoTracking().Where(x=>x.TypeId==TypeId).OrderBy(x => x.ProductName);
             PagedList<Product> lst = new PagedList<Product>(lstsanpham, pageNumber, pageSize);
             return View(lst);
         }
 
         public IActionResult ChiTietSanPham (int ProductId ) 
         {
-            var sanPham=db.Products.SingleOrDefault(x=>x.ProductId==ProductId);
-            var anhSanPham=db.Products.Where(x=>x.ProductId==ProductId).ToList();
+            var sanPham=_db.products.SingleOrDefault(x=>x.ProductId==ProductId);
+            var anhSanPham=_db.products.Where(x=>x.ProductId==ProductId).ToList();
             ViewBag.anhSanPham = anhSanPham;
             return View(sanPham);
         }
@@ -67,13 +70,13 @@ namespace DDG_shop.Controllers
             int pageNumber = page == null || page < 0 ? 1 : page.Value;
             if (!string.IsNullOrEmpty(name))
             {
-                var lstsanpham = db.Products.AsNoTracking().Where(x => x.ProductName.ToUpper().Contains(name.ToUpper()));
+                var lstsanpham = _db.products.AsNoTracking().Where(x => x.ProductName.ToUpper().Contains(name.ToUpper()));
                 PagedList<Product> lst = new PagedList<Product>(lstsanpham, pageNumber, pageSize);
                 return View(lst);
             }
             else
             {
-                var lstsanpham = db.Products.AsNoTracking().OrderBy(x => x.ProductName);
+                var lstsanpham = _db.products.AsNoTracking().OrderBy(x => x.ProductName);
                 PagedList<Product> lst = new PagedList<Product>(lstsanpham, pageNumber, pageSize);
                 return View(lst);
             }

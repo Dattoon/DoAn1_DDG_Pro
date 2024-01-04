@@ -12,7 +12,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post" asp-action="SuaSanPham">
+        <form method="post" asp-action="SuaSanPham" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ProductId" />
             <div class="form-group">
@@ -36,14 +36,14 @@
                 <span asp-validation-for="TypeId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Imgtop" class="control-label"></label>
-                <input asp-for="Imgtop" class="form-control" />
-                <span asp-validation-for="Imgtop" class="text-danger"></span>
+                <label asp-for="ImgUpLoad" class="control-label"></label>
+                <input asp-for="ImgUpLoad" class="form-control" type="file" />
+                <span asp-validation-for="ImgUpLoad" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Imgbot" class="control-label"></label>
-                <input asp-for="Imgbot" class="form-control" />
-                <span asp-validation-for="Imgbot" class="text-danger"></span>
+                <label asp-for="ImgUpLoad2" class="control-label"></label>
+                <input asp-for="ImgUpLoad2" class="form-control" type="file" />
+                <span asp-validation-for="ImgUpLoad2" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

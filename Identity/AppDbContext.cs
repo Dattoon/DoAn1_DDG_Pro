@@ -7,7 +7,11 @@ namespace DoAn1_DDG_Pro.Identity
 {
 	public class AppDbContext : IdentityDbContext<AppUserModel>
 	{
-		public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+        public AppDbContext()
+        {
+        }
+
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
 		public DbSet<Product> Product { get; set; }
 

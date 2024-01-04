@@ -37,6 +37,8 @@
     <Folder Include="AppData\" />
     <Folder Include="ViewModels\" />
     <Folder Include="wwwroot\LayoutDDGSHOP\NewFolder\" />
+    <Folder Include="wwwroot\Media\main\" />
+    <Folder Include="wwwroot\Media\bonus\" />
   </ItemGroup>
 
   <ItemGroup>
