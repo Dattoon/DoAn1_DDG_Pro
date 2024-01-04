@@ -13,11 +13,16 @@ namespace DoAn1_DDG_Pro.Controllers
         {
             _shopDdgContext = shopDdgContext;
         }
-
+        
         public IActionResult OrderForm()
         {
           
             return View("OrderForm");
+        }
+        public IActionResult ViewOrder()
+        {
+
+            return View("ViewOrder");
         }
 
 

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DoAn1_DDG_Pro.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231230122621_VIPPRO")]
-    partial class VIPPRO
+    [Migration("20240104151020_DDGSHOP")]
+    partial class DDGSHOP
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -137,7 +137,9 @@ namespace DoAn1_DDG_Pro.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OrderModel");
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("OrderDetail");
                 });
 
             modelBuilder.Entity("DoAn1_DDG_Pro.Models.OrderModel", b =>
@@ -164,7 +166,7 @@ namespace DoAn1_DDG_Pro.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OrderDetails");
+                    b.ToTable("OrderModel");
                 });
 
             modelBuilder.Entity("DoAn1_DDG_Pro.Models.Product", b =>
@@ -347,6 +349,17 @@ namespace DoAn1_DDG_Pro.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("DoAn1_DDG_Pro.Models.OrderDetails", b =>
+                {
+                    b.HasOne("DoAn1_DDG_Pro.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("DoAn1_DDG_Pro.Models.Product", b =>

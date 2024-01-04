@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace DoAn1_DDG_Pro.Models
 {
@@ -29,6 +30,11 @@ namespace DoAn1_DDG_Pro.Models
 
         public string PaymentMethod { get; set; }
 
-        public string Description { get; set; }
+        [AllowNull]
+        public string Description { get; set; } 
+
+
+        [ForeignKey("ProductId")]
+        public Product Product { get; set; }
     }
 }
