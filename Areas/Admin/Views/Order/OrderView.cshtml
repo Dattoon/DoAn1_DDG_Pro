@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "OrderView";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmins.cshtml";
 }
@@ -14,12 +13,13 @@
             <th> CustomerName </th>
             <th> Email </th>
             <th> SDT </th>
-            <th> Product </th>
+           
             <th> Address </th>
             <th> Price </th>
             <th> Quantity </th>
             <th> PaymentMethod </th>
             <th> Description </th>
+            <th> Product </th>
 
         </tr>
     </thead>
@@ -33,12 +33,14 @@
                 <td> @Html.DisplayFor(modelItem => item.CustomerName)</td>
                 <td> @Html.DisplayFor(modelItem => item.UserName)</td>
                 <td> @Html.DisplayFor(modelItem => item.PhoneNumber)</td>
-                <td> @Html.DisplayFor(modelItem => item.Product)</td>
+                
                 <td> @Html.DisplayFor(modelItem => item.Address)</td>
                 <td> @Html.DisplayFor(modelItem => item.Price)</td>
                 <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
                 <td> @Html.DisplayFor(modelItem => item.PaymentMethod)</td>
                 <td> @Html.DisplayFor(modelItem => item.Description)</td>
+
+
 
             </tr>
         }

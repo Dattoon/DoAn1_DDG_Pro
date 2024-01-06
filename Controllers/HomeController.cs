@@ -27,7 +27,7 @@ namespace DDG_shop.Controllers
 
         public IActionResult Index(string q, int? page)
         {
-            int pageSize = 5;
+            int pageSize = 10;
             int pageNumber = page == null || page < 0 ? 1 : page.Value;
             var lstsanpham = _db.products.AsNoTracking();
 
@@ -43,15 +43,14 @@ namespace DDG_shop.Controllers
 
 
 
-       
-        public IActionResult SanPhamTheoLoai(string TypeId, int? page)
+
+        public IActionResult SanPhamTheoLoai(string TypeId) 
         {
-            int pageSize = 5;
-            int pageNumber = page == null || page < 0 ? 1 : page.Value;
-            var lstsanpham = _db.products.AsNoTracking().Where(x=>x.TypeId==TypeId).OrderBy(x => x.ProductName);
-            PagedList<Product> lst = new PagedList<Product>(lstsanpham, pageNumber, pageSize);
-            return View(lst);
-        }
+            var lstsanpham = _db.products.AsNoTracking().Where(x => x.TypeId == TypeId).OrderBy(x => x.ProductName);
+            return View(lstsanpham);
+        } 
+        
+        
 
         public IActionResult ChiTietSanPham (int ProductId ) 
         {

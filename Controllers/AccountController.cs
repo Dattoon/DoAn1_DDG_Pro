@@ -43,20 +43,23 @@ namespace DoAn1_DDG_Pro.Controllers
         }
 
 
-        
-        
-        public async Task <IActionResult> Register(UserModel user)
+
+
+        public async Task<IActionResult> Register(UserModel user)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                AppUserModel model = new AppUserModel { UserName =user.UserName , Email=user.Email};
+                AppUserModel model = new AppUserModel { UserName = user.UserName, Email = user.Email };
                 IdentityResult result = await _userManager.CreateAsync(model, user.Password);
-                if(result.Succeeded)
+                if (result.Succeeded)
                 {
+                    // Gán role "Guest" cho người dùng mới
+                    await _userManager.AddToRoleAsync(model, "Guest");
+
                     TempData["success"] = "Tạo tài khoản thành công ";
                     return Redirect("/account/login");
                 }
-                foreach(IdentityError error in result.Errors)
+                foreach (IdentityError error in result.Errors)
                 {
                     ModelState.AddModelError("", error.Description);
                 }
@@ -64,6 +67,7 @@ namespace DoAn1_DDG_Pro.Controllers
 
             return View(user);
         }
+
         public async Task<IActionResult> Logout(string returnUrl = "/")
         {
             await _signInManager.SignOutAsync();

@@ -80,23 +80,7 @@
 
                                     <div class="product-actions">
                                         <div class="select-actions d-none d-lg-block clearfix">
-                                            <div class="quantity-area">
-                                                <div class="quantity-title">Số lượng: </div>
-                                                <button type="button" onclick="HRT.All.minusQuantity()" class="qty-btn">
-                                                    <svg focusable="false" class="icon icon--minus " viewBox="0 0 10 2"
-                                                        role="presentation">
-                                                        <path d="M10 0v2H0V0z"></path>
-                                                    </svg>
-                                                </button>
-                                                <input type="text" id="quantity" name="quantity" value="1" min="1"
-                                                    class="quantity-input">
-                                                <button type="button" onclick="HRT.All.plusQuantity()" class="qty-btn">
-                                                    <svg focusable="false" class="icon icon--plus " viewBox="0 0 10 10"
-                                                        role="presentation">
-                                                        <path d="M6 4h4v2H6v4H4V6H0V4h4V0h2v4z"></path>
-                                                    </svg>
-                                                </button>
-                                            </div>
+                                           
                                             <div class="addcart-area">
                                             <a  asp-controller="Cart" asp-action="Add" asp-route-ProductId="@Model.ProductId" type="button" id="add-to-cart"
                                                     class=" add-to-cartProduct button dark btn-addtocart addtocart-modal ButtonPro"
@@ -104,11 +88,7 @@
                                                     Thêm vào giỏ
                                                 </a>
 
-                                                <button type="button" id="buy-now"
-                                                    class="  button dark btn-buynow btnred addtocart-modal" name="add">
-                                                    Mua ngay
-                                                </button>
-
+                                             
                                             </div>
                                         </div>
                                     </div>
@@ -167,7 +147,7 @@
                         <div class="description-content expandable-toggle opened">
 
                             <div class="description-productdetail">
-                               @Model.Description
+                            @Html.Raw(Model.Description)
                             </div>
                             <div class="description-btn">
                                 <button class="expandable-content_toggle js_expandable_content d-none">

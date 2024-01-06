@@ -24,7 +24,7 @@
 								<form action="/cart" method="post" id="cartformpage">
 									<div class="cart-row">
 										<p class="title-number-cart">
-											Bạn đang có <strong class="count-cart" @Model.CartItems.Count > sản phẩm</strong> trong giỏ hàng
+											Bạn đang có <strong class="count-cart">@Model.CartItems.Count.ToString() sản phẩm</strong> trong giỏ hàng
 										</p>
 									
 										@foreach (var item in Model.CartItems)

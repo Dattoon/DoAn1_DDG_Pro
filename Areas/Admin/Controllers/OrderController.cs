@@ -23,13 +23,49 @@ namespace DoAn1_DDG_Pro.Areas.Admin.Controllers
 		{
 			return View(await _dbContext.OrderModel.OrderByDescending(p=>p.Id).ToListAsync());
 		}
-
-        [Route("admin/Order/OrderView")]
-        public async Task<IActionResult> OrderView(string OrderCode)
+        [Route("admin/OrderView/{orderCode}")]
+        public async Task<IActionResult> OrderView(string orderCode)
         {
-			var DetailOrder = await _dbContext.OrderDetail.Include(o=>o.Product).Where(od=>od.OrderCode == OrderCode).ToArrayAsync();
-            return View(DetailOrder);
+            var order = await _dbContext.OrderModel.FirstOrDefaultAsync(o => o.OrderCode == orderCode);
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            var orderDetails = await _dbContext.OrderDetail
+                .Include(o => o.Product)
+                .Where(od => od.OrderCode == orderCode)
+                .ToListAsync();
+
+            if (!orderDetails.Any())
+            {
+                return NotFound();
+            }
+
+            return View(orderDetails); // Trả về một View với mô hình là orderDetails
         }
+
+
+
+
+
+
+        [Route("admin/Access/{id}")]
+        public async Task<IActionResult> Access(int id)
+        {
+            var order = await _dbContext.OrderModel.FirstOrDefaultAsync(o => o.Id == id);
+            if (order != null)
+            {
+                order.Status = 2; // Change the status
+                await _dbContext.SaveChangesAsync();
+            }
+
+            return RedirectToAction("Order"); // This will refresh the page
+        }
+
+
+
+
 
     }
 }

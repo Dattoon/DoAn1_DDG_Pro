@@ -9,9 +9,12 @@ using DoAn1_DDG_Pro.Repository;
 
 namespace DoAn1_DDG_Pro.Areas.Admin.Controllers
 {
+    
     [Area("admin")]
     [Route("admin")]
     [Route("admin/homeadmin")]
+
+    
     public class HomeAdminController : Controller
     {
         
@@ -148,7 +151,7 @@ namespace DoAn1_DDG_Pro.Areas.Admin.Controllers
 
         [Route("XoaSanPham")]
         [HttpGet]
-        public IActionResult XoaSanPham(int ProductID)
+        public async Task< IActionResult> XoaSanPham(int ProductID)
         {
             TempData["Message"] = "";
             var anhSanPhams = _db.products.Where(x => x.ProductId==ProductID);
@@ -159,13 +162,54 @@ namespace DoAn1_DDG_Pro.Areas.Admin.Controllers
             return RedirectToAction("DanhMucSanPham", "HomeAdmin");
         }
 
+
+
+        [Route("XoaLoai")]
+        [HttpGet]
+        public async Task<IActionResult> XoaLoai(string TypeID)
+        {
+            var loaiSanPham = await _db.ProductType.Include(p => p.Products).FirstOrDefaultAsync(p => p.TypeId == TypeID);
+            if (loaiSanPham == null)
+            {
+                return NotFound();
+            }
+
+            if (loaiSanPham.Products.Any())
+            {
+                // Xử lý trường hợp có sản phẩm liên quan đến loại sản phẩm này.
+                // Bạn có thể chọn xóa các sản phẩm liên quan hoặc cập nhật chúng để loại bỏ sự liên kết.
+                foreach (var product in loaiSanPham.Products)
+                {
+                    _db.products.Remove(product);
+                }
+            }
+
+            _db.ProductType.Remove(loaiSanPham);
+            await _db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(DanhMucLoai));
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         [Route("danhmucloai")]
         public  IActionResult DanhMucLoai()
         {
             var lstLoai = _db.ProductType.ToList();
             return View(lstLoai);
         }
-
 
 
         [Route("ThemLoai")]
@@ -178,10 +222,9 @@ namespace DoAn1_DDG_Pro.Areas.Admin.Controllers
         [Route("ThemLoai")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-
         public IActionResult ThemLoai(ProductType Loai)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _db.ProductType.Add(Loai);
                 _db.SaveChanges();
@@ -189,13 +232,65 @@ namespace DoAn1_DDG_Pro.Areas.Admin.Controllers
             }
             return View(Loai);
         }
-            
+
+
+
+        [Route("SuaLoai")]
+        [HttpGet]
+        public IActionResult SuaLoai(string TypeID)
+        {
+            var loaiSanPham = _db.ProductType.Find(TypeID);
+            if (loaiSanPham == null)
+            {
+                return NotFound("Không tìm thấy loại sản phẩm với ID: " + TypeID);
+            }
+            return View(loaiSanPham);
+        }
+
+
+        [Route("SuaLoai")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult SuaLoai(string TypeID, ProductType Loai)
+        {
+            if (TypeID != Loai.TypeId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _db.Update(Loai);
+                    _db.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ProductTypeExists(Loai.TypeId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction("DanhMucLoai");
+            }
+            return View(Loai);
+        }
+
+        private bool ProductTypeExists(string id)
+        {
+            return _db.ProductType.Any(e => e.TypeId == id);
+        }
 
 
 
 
 
-        
+
     }
 }
 

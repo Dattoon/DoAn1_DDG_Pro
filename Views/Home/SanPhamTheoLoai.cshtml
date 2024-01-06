@@ -4,20 +4,10 @@
     Layout = "~/Views/Shared/_LayoutDDG.cshtml";
 }
 
-@using X.PagedList.Mvc.Core;
-@using X.PagedList;
-
-@model X.PagedList.IPagedList<Product>
+@model IEnumerable<Product>
 @foreach (var item in Model)
 {
     @await Html.PartialAsync("PartialSanPham", item)
 }
 
-@Html.PagedListPager(Model, page => Url.Action("SanPhamTheoLoai", new { page = page }), new
-        X.PagedList.Web.Common.PagedListRenderOptions()
-{
-    LiElementClasses = new List<string> { "page-item" },
-    PageClasses = new List<string> { "page-link" }
-}
-
-        )
+)

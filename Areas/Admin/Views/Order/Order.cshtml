@@ -66,9 +66,10 @@
                 </td>
            
             <td>
-                <a asp-action="ViewOrder" asp-controller="ViewOrder" asp-route-ProductI-Code="@item.OrderCode">ViewOrder</a> |
+                    <a asp-area="admin" asp-controller="Order" asp-action="OrderView" asp-route-orderCode="@item.OrderCode">ViewOrder</a> |
 
-                    <a asp-action="XoaOrder" asp-controller="Order" asp-route-ProductId="@item.OrderCode">Delete</a>
+                   <a asp-area="admin" asp-controller="Order" asp-action="Access" asp-route-id="@item.Id">Hoan Thanh</a>
+
             </td>
         </tr>
 }

@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<DoAn1_DDG_Pro.Models.ProductType>
-
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewData["Title"] = "DanhMucLoai";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmins.cshtml";
@@ -26,9 +26,8 @@
                 @Html.DisplayFor(modelItem => item.TypeName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.TypeId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.TypeId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.TypeId">Delete</a>
+                   
+                    <a asp-action="XoaLoai"  asp-route-id="@item.TypeId">Delete</a>
             </td>
         </tr>
 }
