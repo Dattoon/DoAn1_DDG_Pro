@@ -1,20 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using System.Security.Claims;
 
 namespace DoAn1_DDG_Pro.Models.Authentication
 {
-    public class Authentication:ActionFilterAttribute
+    public class Authentication : ActionFilterAttribute
     {
-        public override void OnActionExecuted(ActionExecutedContext context)
+        public override void OnActionExecuting(ActionExecutingContext context)
         {
-           if(context.HttpContext.Session.GetString("Username")==null)
+            var user = context.HttpContext.User;
+
+            if (user == null || !user.Identity.IsAuthenticated)
             {
-                context.Result = new RedirectToRouteResult(
-                    new RouteValueDictionary
-                    {
-                        {"Controller","Access"},
-                        {"Action","Login" }
-                    });
+                context.Result = new RedirectToActionResult("Login", "Account", null);
+            }
+            else if (!user.IsInRole("Admin"))
+            {
+                context.Result = new RedirectToActionResult("Index", "Home", null);
             }
         }
     }

@@ -26,21 +26,30 @@ namespace DoAn1_DDG_Pro.Controllers
         {
             return View(new LoginViewModel {returnUrl=returnUrl});
         }
-        [HttpPost] 
+        
+        [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel loginVM)
         {
             if (!ModelState.IsValid)
             {
-                Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(loginVM.UserName ,loginVM.Password,false,false);
+                var result = await _signInManager.PasswordSignInAsync(loginVM.UserName, loginVM.Password, false, false);
                 if (result.Succeeded)
                 {
-                    
-                    return Redirect(loginVM.returnUrl ?? "/");
+                    var user = await _userManager.FindByNameAsync(loginVM.UserName);
+                    if (await _userManager.IsInRoleAsync(user, "Admin"))
+                    {
+                        return RedirectToAction("Index", "HomeAdmin", new { area = "Admin" });
+                    }
+                    else
+                    {
+                        return Redirect(loginVM.returnUrl ?? "/");
+                    }
                 }
                 ModelState.AddModelError("", "IsValid UserName and Password");
             }
             return View(loginVM);
         }
+
 
 
 

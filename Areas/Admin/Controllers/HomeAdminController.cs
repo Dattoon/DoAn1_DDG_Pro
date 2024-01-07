@@ -5,11 +5,12 @@ using Microsoft.EntityFrameworkCore;
 using X.PagedList;
 using DoAn1_DDG_Pro.Identity;
 using DoAn1_DDG_Pro.Repository;
+using DoAn1_DDG_Pro.Models.Authentication;
 
 
 namespace DoAn1_DDG_Pro.Areas.Admin.Controllers
 {
-    
+    [Authentication]
     [Area("admin")]
     [Route("admin")]
     [Route("admin/homeadmin")]
