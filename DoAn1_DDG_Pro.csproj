@@ -43,6 +43,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\LayoutAdmin\.DS_Store" />
+    <None Include="wwwroot\LayoutAdmin\PSD\Purple_dashboard_free.psd" />
     <None Include="wwwroot\LayoutDDGSHOP\JS\app-combo.js" />
     <None Include="wwwroot\LayoutDDGSHOP\JS\bootstrap.bundle.min.js" />
     <None Include="wwwroot\LayoutDDGSHOP\JS\Function.js" />

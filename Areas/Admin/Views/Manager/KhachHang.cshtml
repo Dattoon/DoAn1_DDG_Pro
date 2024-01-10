@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewData["Title"] = "KhachHang";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmins.cshtml";
+}
+
+<h1>KhachHang</h1>
+
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using DoAn1_DDG_Pro.Models
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr> 
+            <th>#####</th>
+            <th> CustomerName </th>
+            <th> Email </th>
+            <th> SDT </th>   
+            <th> Tổng Tiên  </th>
+            <th> Khách</th>
+        
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="py-1">
+                <img src="~/LayoutAdmin/assets/images/faces-clipart/pic-1.png" alt="image">
+            </td>
+            <td> Dat </td>
+            <td>
+               dat@gmail.com
+            </td>
+            <td>0385042009</td>
+            <td> 5,000,000 VND </td>
+            <td> Tiềm Năng </td>
+        </tr>
+        <tr>
+            <td class="py-1">
+                <img src="~/LayoutAdmin/assets/images/faces-clipart/pic-2.png" alt="image">
+            </td>
+            <td> Duy </td>
+            <td>
+               duy@gamil.com
+            </td>
+            <td>0358062635</td>
+            <td> 850,340,000 VND </td>
+            <td> VIP </td>
+        </tr>
+       
+    </tbody>
+</table>

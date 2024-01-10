@@ -20,11 +20,12 @@
     <thead>
         <tr class="table-success">
             <th>
-                Tên Sản Phẩm 
+                Tùy Chỉnh
             </th>
             <th>
-                Mô Tả
+                Tên Sản Phẩm 
             </th>
+           
             <th>
                 Giá 
             </th>
@@ -36,6 +37,9 @@
             </th>
             <th>
                 Loại
+            </th>
+            <th>
+                Mô Tả
             </th>
             <th></th>
         </tr>
@@ -54,14 +58,17 @@
             {
                 cls = "table-info";
             }
+
             <tr class="@cls">
+                <td>
+                    <a asp-action="SuaSanPham" asp-route-ProductId="@item.ProductId">Edit</a> |
+
+                    <a asp-action="XoaSanPham" asp-route-ProductId="@item.ProductId">Delete</a>
+                </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ProductName)
             </td>
-            <td>
-                    @Html.Raw(item.Description)
-
-            </td>
+           
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
@@ -74,11 +81,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Type.TypeId)
             </td>
-            <td>
-                <a asp-action="SuaSanPham" asp-route-ProductId="@item.ProductId">Edit</a> |
-                
-                    <a asp-action="XoaSanPham" asp-route-ProductId="@item.ProductId">Delete</a>
-            </td>
+                <td>
+                    @Html.Raw(item.Description)
+
+                </td>
         </tr>
 }
     </tbody>
